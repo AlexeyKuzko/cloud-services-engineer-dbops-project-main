@@ -51,11 +51,13 @@ psql -h localhost -p 5432 -U store_user -d store
 ```
 
 ## Daily Shipped Orders for the Last 7 Days
-Query to show the number of sausages sold each day in the past week.
+After connection to store DB, query to show the number of sausages sold each day in the past week.
 ```sql
--SELECT o.date_created, SUM(op.quantity) AS total_sausages
+SELECT o.date_created, SUM(op.quantity) AS total_sausages
 FROM orders AS o
 JOIN order_product AS op ON o.id = op.order_id
 WHERE o.status = 'shipped' AND o.date_created > now() - INTERVAL '7 DAY'
 GROUP BY o.date_created;
 ```
+
+![image](https://github.com/AlexeyKuzko/cloud-services-engineer-dbops-project-main/blob/main/success.png)
